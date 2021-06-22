@@ -1,3 +1,4 @@
 # Project_01
-Java+DB Project \n
+Java+DB Project
+
 Making Cafe Application
