@@ -216,7 +216,7 @@ public class SaleManager_edit {
 					
 					System.out.println("----------------------------------------");
 					
-					pManager.usePoint(currentId, totalPrice);
+					pManager.usePoint2(currentId);
 					
 					System.out.println("포인트를 "+beforePoint+"점 사용하였습니다"); 
 					

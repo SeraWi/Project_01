@@ -99,7 +99,9 @@ public class Point {
 
 	
 	 void usePoint(String currentId, int totalPrice) {
-		//포인트를 사용한다. 포인트는 전부 사용하며 사용후 0이된다. 
+		// 포인트를 사용한다. 
+		// 가지고 있는 포인트가 결제 금액 보다 클 때 호출한다.
+		// beforePoint >= totalPrice
 		
 		try {
 			//1. 드라이버 로드
@@ -141,6 +143,50 @@ public class Point {
 		
 	}
 
+	 void usePoint2(String currentId) {
+		// 포인트를 사용한다. 
+		// 가지고 있는 포인트보다 결제 금액이 클때 호출 ->모든 포인트 다쓰고 0이된다. point = 0
+		// beforePoint < totalPrice
+		
+		try {
+			//1. 드라이버 로드
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			//2. 연결
+			String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:xe";
+			String user = "hr";
+			String pw = "tiger";
+			
+			// Point > toalPrice
+			String updatePoint = "update member set point= ? where id = ? ";
+			pstmt = conn.prepareStatement(updatePoint);
+			int result = 0;
+			
+			
+			//모든
+			pstmt.setInt(1, 0);
+			pstmt.setString(2, currentId);
+
+			result = pstmt.executeUpdate();
+			
+//			
+//			if(result > 0) {
+//				System.out.println("업데이트 완료");
+//			}else {
+//				System.out.println("업데이트 실패");
+//			}
+//			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+	}
 
 
 	
