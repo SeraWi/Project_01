@@ -1,4 +1,4 @@
-package test01;
+package test0623_2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Order2 {
+public class OrderEdit_0623 {
 
 	static Scanner scanner = new Scanner(System.in);
 	static ArrayList<Sale> list ;
@@ -23,7 +23,7 @@ public class Order2 {
 		int cake= 5500;
 
 		list = new ArrayList<>();
-		
+
 		System.out.println("주문하기");
 
 		System.out.println("메뉴 입니다.");
@@ -43,7 +43,7 @@ public class Order2 {
 		String[] inputDatas = inputData.split(" ");
 
 		//샀을 때 sale객체로 정보 넣기
-		
+
 
 		switch(inputDatas[0]) {
 
@@ -70,12 +70,12 @@ public class Order2 {
 		case "6":
 			System.exit(0);
 		}
-	
-//------------------------------------------------------------------------------------------------------------------------------
+
+		//------------------------------------------------------------------------------------------------------------------------------
 		//JAVA -> DB
 		// 자바에서 입력받은 데이터를 DB로 저장한다. 
-		// 이 부분을 메소드로 saleDao 로 넣기! 완료
-		
+		// 이 부분을 메소드로 saleDao 로 넣기
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -108,7 +108,7 @@ public class Order2 {
 				System.out.println("입력실패!");
 			}
 
-//--------------------------------------------------------------------------------------------------------------------------------------				
+			//--------------------------------------------------------------------------------------------------------------------------------------				
 			System.out.println("----------------------------------------");
 			int totalPrice = 0;
 
@@ -117,12 +117,12 @@ public class Order2 {
 			}
 
 
-			int point = (int)(totalPrice * 0.01);
+			int expectedPoint = (int)(totalPrice * 0.01);
 
 			System.out.println("총 예상 결제 금액: " +totalPrice +"원 입니다.");	
-			System.out.println("총 예상 적립 포인트:"+ point +"점입니다."); 
+			System.out.println("총 예상 적립 포인트:"+ expectedPoint +"점입니다."); 
 
-//--------------------------------------------------------------------------------------------------------------------------------------				
+			//--------------------------------------------------------------------------------------------------------------------------------------				
 
 			System.out.println("---------------------------------------");
 
@@ -131,42 +131,101 @@ public class Order2 {
 
 			String readPoint = "select point from member where id = ?";
 			pstmt= conn.prepareStatement(readPoint);
-			
+
 			pstmt.setString(1, memId);
 			rs = pstmt.executeQuery();
-			
-			int currPoint = 0;
-			while(rs.next()) {
-				currPoint = rs.getInt("point");
-			}
-			
-			
-			System.out.println("현재 사용가능한 포인트: " + currPoint);
-			System.out.println("포인트를 사용하시겠습니까? 1. 예 2. 아니오");
-			System.out.println("(포인트를 사용할시 현재 결제하시는 상품의 포인트는 적립이 되지 않습니다.)");
-			//int answer = Integer.parseInt(scanner.nextLine());
-//---------------------------------------------------------------------------------------------------------
-			System.out.println("------------------------------------");
-			
-			//DB에 포인트 적립하기 ->update 하기
-			String updatePoint = "update member set point= point + ? where id = ? ";
-			pstmt = conn.prepareStatement(updatePoint);
-			
-			pstmt.setInt(1, point);
-			pstmt.setString(2, memId);
-			
-			result = pstmt.executeUpdate();
-			
-			
-			if(result > 0) {
-				System.out.println("업데이트 완료");
-			}else {
-				System.out.println("업데이트 실패");
-			}
-			
 
-			System.out.println("포인트가 "+point+"점 적립되어"+ (currPoint+point)+" 점 있습니다.");
-			
+			int havePoint = 0;
+			while(rs.next()) {
+				havePoint = rs.getInt("point");
+			}
+
+
+			System.out.println("현재 사용가능한 포인트: " + havePoint);
+			System.out.println("포인트를 사용하시겠습니까? 1. 예 2. 아니오"); //예 아니오 분기하기
+			System.out.println("(포인트를 사용할시 현재 결제하시는 상품의 포인트는 적립이 되지 않습니다.)");
+			int answer = Integer.parseInt(scanner.nextLine());
+
+			if(answer == 1) { //포인트 사용하기
+				//DB에 포인트 마이너스 하기 ->Update하기
+				//update member set point = point- price where id = park1234
+
+				String updatePoint = "update member set point= point - ? where id = ? ";
+				pstmt = conn.prepareStatement(updatePoint);
+
+				//point = point -  havePoint 포인트 사용하기! 마이너스 시키기
+				pstmt.setInt(1, havePoint);
+				pstmt.setString(2, memId);
+
+				result = pstmt.executeUpdate();
+
+
+				if(result > 0) {
+					System.out.println("업데이트 완료");
+				}else {
+					System.out.println("업데이트 실패");
+				}
+
+
+				//System.out.println("포인트가 "+havePoint+"점 사용하여"+ (havePoint - totalPrice)+"점 있습니다.");
+				System.out.println("포인트를 "+havePoint+"점 사용하였습니다"); 
+
+				//포인트 사용할 경우  결제금액에서 마이너스 시킨다.
+				System.out.println("결제 금액은 "+(totalPrice - havePoint)+"원 입니다.");
+
+
+
+
+			}else {//포인트 사용하지 않고 그대로 적립하기
+
+				//DB에 포인트 적립하기 ->update 하기
+				String updatePoint = "update member set point= point + ? where id = ? ";
+				pstmt = conn.prepareStatement(updatePoint);
+
+				pstmt.setInt(1, expectedPoint);
+				pstmt.setString(2, memId);
+
+				result = pstmt.executeUpdate();
+
+
+				if(result > 0) {
+					System.out.println("업데이트 완료");
+				}else {
+					System.out.println("업데이트 실패");
+				}
+
+
+				System.out.println("포인트가 "+expectedPoint+"점 적립되어 "+ (havePoint+expectedPoint)+"점 있습니다.");
+
+
+
+
+			}
+
+
+
+			//---------------------------------------------------------------------------------------------------------
+			//			System.out.println("------------------------------------");
+
+			//DB에 포인트 적립하기 ->update 하기
+			//			String updatePoint = "update member set point= point + ? where id = ? ";
+			//			pstmt = conn.prepareStatement(updatePoint);
+			//			
+			//			pstmt.setInt(1, point);
+			//			pstmt.setString(2, memId);
+			//			
+			//			result = pstmt.executeUpdate();
+			//			
+			//			
+			//			if(result > 0) {
+			//				System.out.println("업데이트 완료");
+			//			}else {
+			//				System.out.println("업데이트 실패");
+			//			}
+			//			
+			//
+			//			System.out.println("포인트가 "+point+"점 적립되어"+ (currPoint+point)+" 점 있습니다.");
+
 
 
 		} catch (ClassNotFoundException e) {

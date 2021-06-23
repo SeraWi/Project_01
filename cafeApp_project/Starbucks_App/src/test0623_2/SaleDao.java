@@ -1,4 +1,4 @@
-package test01;
+package test0623_2;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,6 +28,7 @@ public class SaleDao {
 	
 	// 반환 타입은 List<Sale>
 	// 매개 변수 - Connection 객체 :Statement
+	
 	ArrayList <Sale> getSaleList(Connection conn){
 		ArrayList<Sale> list = null;
 		Statement stmt = null;

@@ -1,4 +1,4 @@
-package test01;
+package test0623_2;
 
 import java.io.DataOutput;
 import java.sql.Connection;
@@ -16,11 +16,16 @@ public class SaleManager {
 
 	SaleDao dao;
 	Scanner scanner;
+	private String currentId;
+	MemberManager memManager;
 
 
 	SaleManager(SaleDao dao){
 		this.dao = dao;
 		scanner= new Scanner(System.in);
+		this.currentId = currentId;
+		memManager = new MemberManager(MemberDao.getInstance());
+		
 	}
 
 	// DB에 있는 sale table을 가져오도록 한다. 
@@ -137,13 +142,40 @@ public class SaleManager {
 			}
 			
 			
-			int result = dao.insertSale(conn, list);
+			int result = dao.insertSale(conn, list);  //SaleDao 로 넘겨서 Sale DB에 저장하기
 			
 			if(result> 0) {
 				System.out.println("입력완료");
 			}else {
 				System.out.println("입력 실패");
 			}
+//			---------------------------------------------------------------------
+			
+			// 고객에게 예상 적립 포인트와 총 결제 금액 보여주기
+			
+			System.out.println("----------------------------------------");
+			int totalPrice = 0;
+
+			for(int i = 0; i <list.size(); i++) {
+				totalPrice += list.get(i).getPrice();
+			}
+
+
+			int expectedPoint = (int)(totalPrice * 0.01);
+
+			System.out.println("총 예상 결제 금액: " +totalPrice +"원 입니다.");	
+			System.out.println("총 예상 적립 포인트:"+ expectedPoint +"점입니다."); 
+			
+			
+			
+			//회원 DB에서 point를 read하기
+			memManager.memPoint();
+			
+			// System.out.println("현재 사용가능한 포인트: " + havePoint);
+			
+//-----------------------------------------------------------------------------------
+			
+			
 			
 			
 		} catch (SQLException e) {
