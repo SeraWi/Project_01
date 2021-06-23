@@ -99,7 +99,9 @@ public class Point {
 
 	
 	void usePoint(String currentId, int totalPrice) {
-		//포인트를 사용한다. 포인트는 전부 사용하며 사용후 0이된다. 
+		//포인트를 사용한다. 
+		
+		
 		
 		try {
 			//1. 드라이버 로드
