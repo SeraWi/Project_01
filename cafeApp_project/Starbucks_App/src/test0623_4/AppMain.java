@@ -6,7 +6,7 @@ public class AppMain {
 	
 	
 	static MemberManager memManager = new MemberManager(MemberDao.getInstance());
-	static SaleManager saleManager = new SaleManager(SaleDao.getInstance());
+	static SaleManager_edit saleManager = new SaleManager_edit(SaleDao.getInstance());
 	static Point pManager = new Point();
 	
 	
