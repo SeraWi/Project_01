@@ -1,4 +1,4 @@
-package test0623_2;
+package test0623_2.copy;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

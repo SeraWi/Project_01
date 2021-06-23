@@ -1,4 +1,4 @@
-package test0623_2;
+package test0623_2.copy;
 
 import java.util.Scanner;
 
@@ -8,7 +8,7 @@ public class AppMain {
 	static MemberManager memManager = new MemberManager(MemberDao.getInstance());
 	static SaleManager saleManager = new SaleManager(SaleDao.getInstance());
 	
-	static String currentId;
+	
 	
 	
 	public static void main(String[] args) {
@@ -29,7 +29,7 @@ public class AppMain {
 			switch (num) {
 			case 1:
 				memManager.memAdd();
-				currentId = memManager.chkLogin(); // 로그인한후 id를 static 변수로 저장
+				
 				
 				break;
 			case 2:			
@@ -47,9 +47,8 @@ public class AppMain {
 
 				switch (num) {
 				case 1:
-					saleManager.order(); //주문하기 -> 예상결제금액, 예상 적립 포인트 보여주기
-					memManager.memPoint(); // 현재 가지고 있는 포인트 보여주기
-					// 포인트 사용 하기
+					saleManager.order(memManager.currentId); //주문하기 -> 예상결제금액, 예상 적립 포인트 보여주기
+				
 					break;
 				case 2:
 					memManager.memPoint();

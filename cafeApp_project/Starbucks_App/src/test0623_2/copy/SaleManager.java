@@ -1,4 +1,4 @@
-package test0623_2;
+package test0623_2.copy;
 
 import java.io.DataOutput;
 import java.sql.Connection;
@@ -18,14 +18,14 @@ public class SaleManager {
 	SaleDao dao;
 	Scanner scanner;
 	private String currentId;
-	//MemberManager memManager;
+	MemberManager memManager;
 
 
 	SaleManager(SaleDao dao){
 		this.dao = dao;
 		scanner= new Scanner(System.in);
 		this.currentId = currentId;
-		//memManager = new MemberManager(MemberDao.getInstance());
+		memManager = new MemberManager(MemberDao.getInstance());
 		
 	}
 
@@ -72,7 +72,7 @@ public class SaleManager {
 	}
 
 	//주문하기 메소드
-	void order() {
+	void order(String currentId) {
 		// 주문하기 = sale DB에 저장한다. 
 		
 		//connection객체 생성
@@ -170,7 +170,7 @@ public class SaleManager {
 			
 			
 			//회원 DB에서 point를 read하기
-			//memManager.memPoint();
+			memManager.memPoint(currentId);
 			
 			// System.out.println("현재 사용가능한 포인트: " + havePoint);
 			
