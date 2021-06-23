@@ -179,23 +179,41 @@ public class SaleManager {
 
 			if(answer == 1) { //포인트 사용하기
 				
+				
+				// 포인트 10000 > 상품 금액 4000 -> 결제= 0, 남은 포인트 = 10000-4000
+				// 포인트 4000 < 상품 금액 10000 -> 결제하실 금액 10000-4000, 남은 포인트 = 0
+				// 포인트  4000 = 상품 금액 4000  -> 결제 = 0, 남은 포인트 = 0
+				// 포인트 0 ->  사용가능한 포인트 없습니다. -> 적립만 가능하도록
+				
+				
+				
+				
+				System.out.println("----------------------------------------");
+				
+				//point 사용 하기
 				pManager.usePoint(currentId, totalPrice);
 				
+				//가진 포인트 사용합니다.
 				System.out.println("포인트를 "+beforePoint+"점 사용하였습니다"); 
 
 				//포인트 사용할 경우  결제금액에서 마이너스 시킨다.
 				System.out.println("결제 금액은 "+(totalPrice - beforePoint)+"원 입니다.");
+				
 				// 포인트 사용후 사용가능한 포인트 확인
 				int afterPoint = pManager.readPoint(currentId);
 				System.out.println("현재 사용가능한 포인트 : " +afterPoint); 
+				
+				
 
-
+				System.out.println("----------------------------------------");
 
 			}else {//포인트 사용하지 않고 그대로 적립하기
-
+				System.out.println("----------------------------------------");
+				
 				pManager.savePoint(currentId, expectedPoint); //포인트 적립
 				System.out.println("포인트가 "+expectedPoint+"점 적립되어 "+ (beforePoint+expectedPoint)+"점 있습니다.");
-
+				
+				System.out.println("----------------------------------------");
 			}
 					
 			
