@@ -1,4 +1,4 @@
-package pointTest;
+package test0623_4;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -77,11 +77,11 @@ public class Point {
 			result = pstmt.executeUpdate();
 
 
-			if(result > 0) {
-				System.out.println("업데이트 완료");
-			}else {
-				System.out.println("업데이트 실패");
-			}
+//			if(result > 0) {
+//				System.out.println("업데이트 완료");
+//			}else {
+//				System.out.println("업데이트 실패");
+//			}
 			
 			
 
@@ -98,7 +98,7 @@ public class Point {
 
 
 	
-	void usePoint(String currentId, int totalPrice) {
+	 void usePoint(String currentId, int totalPrice) {
 		//포인트를 사용한다. 포인트는 전부 사용하며 사용후 0이된다. 
 		
 		try {
@@ -111,24 +111,24 @@ public class Point {
 			String pw = "tiger";
 			
 
-			String updatePoint = "update member set point= point -? where id = ? ";
+			String updatePoint = "update member set point= ? where id = ? ";
 			pstmt = conn.prepareStatement(updatePoint);
 			int result = 0;
 			
 			
 			//point = point -  havePoint 포인트 사용하기! 마이너스 시키기
-			pstmt.setInt(1, totalPrice);
+			pstmt.setInt(1, 0);
 			pstmt.setString(2, currentId);
 
 			result = pstmt.executeUpdate();
 			
-			
-			if(result > 0) {
-				System.out.println("업데이트 완료");
-			}else {
-				System.out.println("업데이트 실패");
-			}
-			
+//			
+//			if(result > 0) {
+//				System.out.println("업데이트 완료");
+//			}else {
+//				System.out.println("업데이트 실패");
+//			}
+//			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -140,6 +140,8 @@ public class Point {
 
 		
 	}
-	
+
+
+
 	
 }

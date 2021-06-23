@@ -1,4 +1,4 @@
-package test0623_2.copy;
+package test0623_3;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -148,6 +148,7 @@ public class OrderEdit_0623 {
 
 			if(answer == 1) { //포인트 사용하기
 				//DB에 포인트 마이너스 하기 ->Update하기
+				//Point는 모두 사용하게 된다 ->point 0이된다
 				//update member set point = point- price where id = park1234
 
 				String updatePoint = "update member set point= point - ? where id = ? ";

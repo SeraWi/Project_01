@@ -7,11 +7,16 @@ public class PointMain {
 		
 		
 		Point point = new Point();
-		int havePoint = point.readPoint("park1234");
-		System.out.println(havePoint);
+
+		point.readPoint("park1234"); // 포인트 확인하기
 		
 		
+		point.savePoint("park1234", 4000);
+		point.readPoint("park1234"); // 포인트 적립후 확인하기
 		
+		
+		point.usePoint("park1234", 3000); //포인트 사용하기
+		point.readPoint("park1234"); //포인트 사용후 확인하기
 		
 	}
 	

@@ -1,4 +1,4 @@
-package test0623_2.copy;
+package test0623_3;
 
 public class Member {
 

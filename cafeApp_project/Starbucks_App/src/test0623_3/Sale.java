@@ -1,4 +1,4 @@
-package test0623_2.copy;
+package test0623_3;
 
 public class Sale {
 	//메뉴 세팅하고 ->DB에 저장

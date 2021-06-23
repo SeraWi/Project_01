@@ -1,4 +1,4 @@
-package test0623_2.copy;
+package test0623_4;
 
 import java.io.DataOutput;
 import java.sql.Connection;
@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Scanner;
 
 
-
 public class SaleManager {
 
 
@@ -18,14 +17,14 @@ public class SaleManager {
 	SaleDao dao;
 	Scanner scanner;
 	private String currentId;
-	MemberManager memManager;
+	Point pManager;
 
 
 	SaleManager(SaleDao dao){
 		this.dao = dao;
 		scanner= new Scanner(System.in);
 		this.currentId = currentId;
-		memManager = new MemberManager(MemberDao.getInstance());
+		pManager = new Point();
 		
 	}
 
@@ -150,7 +149,7 @@ public class SaleManager {
 			}else {
 				System.out.println("입력 실패");
 			}
-//			---------------------------------------------------------------------
+//	------------------------------------------------------------------------------------------
 			
 			// 고객에게 예상 적립 포인트와 총 결제 금액 보여주기
 			
@@ -168,25 +167,42 @@ public class SaleManager {
 			System.out.println("총 예상 적립 포인트:"+ expectedPoint +"점입니다."); 
 			
 			
-			
+//-------------------------------------------------------------------------------------------
 			//회원 DB에서 point를 read하기
-			memManager.memPoint(currentId);
-			
-			// System.out.println("현재 사용가능한 포인트: " + havePoint);
-			
+			int beforePoint = pManager.readPoint(currentId);
+			System.out.println("현재 사용가능한 포인트 : " + beforePoint);
 //-----------------------------------------------------------------------------------
 			
-			
-			
+			System.out.println("포인트를 사용하시겠습니까? 1. 예 2. 아니오"); //예 아니오 분기하기
+			System.out.println("(포인트를 사용할시 현재 결제하시는 상품의 포인트는 적립이 되지 않습니다.)");
+			int answer = Integer.parseInt(scanner.nextLine());
+
+			if(answer == 1) { //포인트 사용하기
+				
+				pManager.usePoint(currentId, totalPrice);
+				
+				System.out.println("포인트를 "+beforePoint+"점 사용하였습니다"); 
+
+				//포인트 사용할 경우  결제금액에서 마이너스 시킨다.
+				System.out.println("결제 금액은 "+(totalPrice - beforePoint)+"원 입니다.");
+				// 포인트 사용후 사용가능한 포인트 확인
+				int afterPoint = pManager.readPoint(currentId);
+				System.out.println("현재 사용가능한 포인트 : " +afterPoint); 
+
+
+
+			}else {//포인트 사용하지 않고 그대로 적립하기
+
+				pManager.savePoint(currentId, expectedPoint); //포인트 적립
+				System.out.println("포인트가 "+expectedPoint+"점 적립되어 "+ (beforePoint+expectedPoint)+"점 있습니다.");
+
+			}
+					
 			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
 	}
-
-
-	
-
 
 }
