@@ -110,14 +110,14 @@ public class Point {
 			String user = "hr";
 			String pw = "tiger";
 			
-
-			String updatePoint = "update member set point= ? where id = ? ";
+			// Point > toalPrice
+			String updatePoint = "update member set point= point - ? where id = ? ";
 			pstmt = conn.prepareStatement(updatePoint);
 			int result = 0;
 			
 			
 			//point = point -  havePoint 포인트 사용하기! 마이너스 시키기
-			pstmt.setInt(1, 0);
+			pstmt.setInt(1, totalPrice);
 			pstmt.setString(2, currentId);
 
 			result = pstmt.executeUpdate();
