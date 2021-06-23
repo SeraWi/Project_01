@@ -18,7 +18,6 @@ public class SaleMain {
 			
 			manager.saleList();
 			
-			//manager.order();
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
