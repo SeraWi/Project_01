@@ -94,20 +94,20 @@ public class SaleManager {
 
 
 	// 3. 관리자가 오늘 메뉴당 판매수와 판매액을 확인할 수 있다.
-void menuSalePrice() {
-		
+	void menuSalePrice() {
+
 
 		try {
 			conn= DriverManager.getConnection(jdbcUrl, user, pw);
 
 			List<Menu> list = dao.getMenuSalePrice(conn);
-			
+
 			System.out.println("오늘 메뉴별  판매된 갯수 와 판매액을 조회합니다.");
 			System.out.println("------------------------------------------");
 			System.out.println("메뉴 \t              판매수 \t             판매액 ");
-			
-			
-			
+
+
+
 			for(Menu menu : list) {
 				if(menu.getpName().equals("americano") || menu.getpName().equals("sandwich")) {
 					System.out.println(menu.getpName() + "\t" + menu.getpNumSales()+ "\t" + menu.getpSalePrice());
@@ -116,7 +116,7 @@ void menuSalePrice() {
 				}
 			}
 			System.out.println("------------------------------------------");
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
