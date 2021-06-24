@@ -37,7 +37,8 @@ public class AppMain {
 				break;
 			case 3: 
 				admin.calling();
-				
+				System.exit(0);
+				break;
 			default :
 				System.out.println("잘못 눌렀습니다.");
 			}
