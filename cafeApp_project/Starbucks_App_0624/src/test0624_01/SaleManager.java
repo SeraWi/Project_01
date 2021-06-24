@@ -151,14 +151,14 @@ public class SaleManager {
 			System.out.println("주문하기");
 
 			System.out.println("메뉴 입니다.");
-			System.out.println("------------------------------------");
+			System.out.println("--------------------------------------------------");
 			System.out.println("1. Amerciano : 4100");
 			System.out.println("2. Latte : 4600");
 			System.out.println("3. Sandwich : 6200");
 			System.out.println("4. salad : 5000");
 			System.out.println("5. cake : 5500");
 			System.out.println("6. 주문 완료");
-			System.out.println("------------------------------------");
+			System.out.println("--------------------------------------------------");
 
 			//while(true)
 			System.out.println("원하시는 메뉴의 번호와 수량을 입력하세요.");
@@ -197,17 +197,17 @@ public class SaleManager {
 
 
 			int result = dao.insertSale(conn, list);  //SaleDao 로 넘겨서 Sale DB에 저장하기
-
-			if(result> 0) {
-				System.out.println("입력완료");
-			}else {
-				System.out.println("입력 실패");
-			}
+//
+//			if(result> 0) {
+//				System.out.println("입력완료");
+//			}else {
+//				System.out.println("입력 실패");
+//			}
 			//	------------------------------------------------------------------------------------------
 
 			// 고객에게 예상 적립 포인트와 총 결제 금액 보여주기
 
-			System.out.println("----------------------------------------");
+			System.out.println("--------------------------------------------------");
 			int totalPrice = 0;
 
 			for(int i = 0; i <list.size(); i++) {
@@ -226,7 +226,7 @@ public class SaleManager {
 			int beforePoint = pManager.readPoint(currentId);
 			System.out.println("현재 사용가능한 포인트 : " + beforePoint);
 			//-----------------------------------------------------------------------------------
-
+			System.out.println("--------------------------------------------------");
 			System.out.println("포인트를 사용하시겠습니까? 1. 예 2. 아니오"); //예 아니오 분기하기
 			System.out.println("(포인트를 사용할시 현재 결제하시는 상품의 포인트는 적립이 되지 않습니다.)");
 			int answer = Integer.parseInt(scanner.nextLine());
@@ -243,7 +243,7 @@ public class SaleManager {
 
 				if(beforePoint >= totalPrice) {
 					// 포인트 10000 > 상품 금액 4000 -> 결제= 0, 남은 포인트 = 10000-4000
-					System.out.println("----------------------------------------");
+					System.out.println("--------------------------------------------------");
 
 					//point 사용 하기
 					pManager.usePoint(currentId, totalPrice);
@@ -260,35 +260,32 @@ public class SaleManager {
 					afterPoint = pManager.readPoint(currentId);
 					System.out.println("결제 후 포인트 : " + afterPoint); 
 
-
-
-					System.out.println("----------------------------------------");
+					System.out.println("--------------------------------------------------");
 
 
 				} else if(beforePoint < totalPrice){
 					// 포인트 4000 < 상품 금액 10000 -> 결제하실 금액 10000-4000, 남은 포인트 = 0
 
-					System.out.println("----------------------------------------");
+					System.out.println("--------------------------------------------------");
 
 					pManager.usePoint2(currentId);
 
 					System.out.println("포인트를 "+beforePoint+"점 사용하였습니다"); 
-
-					System.out.println("결제 금액은 " + (totalPrice-beforePoint)+ "입니다.");
-
+					System.out.println("결제 금액은 " + (totalPrice-beforePoint)+ "원 입니다.");
 					System.out.println("결제 후 포인트 : 0 점" ); 
 
-
+					System.out.println("--------------------------------------------------");
 				} 
 
 
 			}else {//포인트 사용하지 않고 그대로 적립하기
-				System.out.println("----------------------------------------");
+				System.out.println("--------------------------------------------------");
 
 				pManager.savePoint(currentId, expectedPoint); //포인트 적립
+				System.out.println("결제 금액은  " +totalPrice +"원 입니다.");
 				System.out.println("포인트가 "+expectedPoint+"점 적립되어 "+ (beforePoint+expectedPoint)+"점 있습니다.");
 
-				System.out.println("----------------------------------------");
+				System.out.println("--------------------------------------------------");
 			}
 
 
