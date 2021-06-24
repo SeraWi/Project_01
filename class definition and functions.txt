@@ -34,7 +34,7 @@ class  정의서
 ●void order(String currentId) : 주문하기 메소드 -> sale db에 저장된다.
 
 
-5. Point
+5. Point(리팩토링)
 
 ●int readPoint(String currentId) : 포인트 확인하기( Member DB에서 가져온다)
 
@@ -46,3 +46,53 @@ class  정의서
 ●void usePoint2(String currentId) : 포인트 사용하기 2( 조건: 가지고 있는 포인트보다 결제 금액이 클때 호출 ->모든 포인트 다쓰고 0이된다. point = 0
 						beforePoint < totalPrice)
 		
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1.Member
+--정의 : 회원의 정보를 저장한다.
+-- 변수:  private int memcode; 
+	private String name; 
+	private String id;
+	private String pw;
+	private String address;
+	private String phone;
+	private double point;
+
+-- 생성자
+-- getter/ setter
+
+2.MemberDao
+●ArrayList<Member> getList(Connection con) : Member 전체 리스트 가져오기(READ)
+
+●ArrayList<Member> getList(Connection con, String currentId) : 회원 정보 보기( 특정회원의 정보만 가져온다) ,READ
+
+●int insertMem(Connection con, Member mem) : 회원 가입 , 회원 정보 INSERT
+
+●int editMem(Connection con, Member mem, String currentId) : 회원정보 수정 UPDATE
+
+●int deleteMem(Connection con, String currentId)  : 회원탈퇴 DELETE
+
+●int readPoint(Connection con , String currentId) : 회원 포인트 읽어오기(READ)
+
+3.MemberManager
+●void memList() : 회원 정보 전체 출력
+
+●void myInfo() : 특정 회원의 정보보기
+
+●void memAdd() : 회원가입
+
+●void memEdit() : 회원 정보 수정
+
+●void memDel() : 회원 탈퇴
+
+●void chkLogin() : 로그인
+
+●String chKOverlap() : 아이디 중복 테스트
+
+●void memPoint(String currentId) : 포인트 조회하기
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Menu,
+Login
+
+

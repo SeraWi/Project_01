@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 public class Point {
 	// Point 클래스 정의
-	// 1. Point 읽어온다 -> readPoint -> read (select)
-	// 2. Point 적립한다. -> savePoint -> update
-	// 3. Point 사용한다. ->usePoint ->update
+	// 1. Point 읽어온다 :readPoint -> read (select)
+	// 2. Point 적립한다.: savePoint -> update
+	// 3. Point 사용한다. :usePoint ->update
 	// 파라미터로 currentId를 받아온다. 
 	
 	

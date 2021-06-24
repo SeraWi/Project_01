@@ -21,7 +21,7 @@ public class MemberDao {
 	}
 	
 	// 1. 전체 데이터 출력
-	// 반환 타입 List<Dept>
+	
 	// 매개변수 - Connection 객체 : Statement
 	ArrayList<Member> getList(Connection con){
 		

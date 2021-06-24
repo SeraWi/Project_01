@@ -1,0 +1,16 @@
+리팩토링
+
+point 클래스 생성 이유 : memberManager와 saleManager 두 클래스가 Member DB에 접근해야하기때문에
+point 클래스는 따로 빼서 만들었다.
+
+앞으로 해결해야할 문제
+DB가 독립적이다 ->외래키를 사용하지 않음
+상속 X
+void order() -> 긴 코드 분리시켜야 함
+Menu DB를 사용하기
+
+void Order() 에 Message Chains 발생
+
+sale manager 에 있는 order 메소드가 있고 order메소드를 거쳐서 sale DB에 저장된다.
+
+객체 간의 기능 이동

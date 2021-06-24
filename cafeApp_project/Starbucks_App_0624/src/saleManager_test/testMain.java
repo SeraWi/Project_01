@@ -5,10 +5,10 @@ public class testMain {
 		SaleManager sm = new SaleManager(SaleDao.getInstance());
 		
 		
-		//sm.order("park1234");
+		sm.order("park1234");
 		
 		
-		sm.saleList();
+		//sm.saleList();
 		
 		
 	}
