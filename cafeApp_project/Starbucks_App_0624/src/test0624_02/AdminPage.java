@@ -14,6 +14,7 @@ public class AdminPage {
 		System.out.println("1. 회원 정보 보기");
 		System.out.println("2. 판매 정보 보기");
 		System.out.println("3. 메뉴 관리 ");
+		System.out.println("4. 관리자 모드 종료");
 
 
 		int choice = Integer.parseInt(sc.nextLine());
@@ -50,7 +51,7 @@ public class AdminPage {
 				break;
 			}
 
-
+			break;
 
 		case 3:
 			
@@ -71,15 +72,18 @@ public class AdminPage {
 				menuManager.menuList();
 				break;
 			case 2:
-				menuManager.menuEdit();
+				menuManager.menuAdd();;
 				break;
 			case 3:
+				menuManager.menuEdit();;
+				break;
+			case 4:
 				menuManager.menuDel();
 				break;
 			}
 			
 			
-			
+			System.exit(0);
 			break;
 		}
 	}
