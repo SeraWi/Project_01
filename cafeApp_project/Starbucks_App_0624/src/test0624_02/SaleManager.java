@@ -17,7 +17,7 @@ public class SaleManager {
 	private SaleDao dao;
 	Scanner scanner;
 	private String currentId;
-	Point pManager;
+	Point point;
 
 	// Connection 객체 생성 
 	Connection conn = null;
@@ -32,7 +32,7 @@ public class SaleManager {
 		this.dao = dao;
 		scanner= new Scanner(System.in);
 		this.currentId = currentId;
-		pManager = new Point();
+		point = new Point();
 
 	}
 
@@ -116,7 +116,38 @@ public class SaleManager {
 	}
 
 
-	// 4. 주문하기 메소드 -> SALE DB에 저장된다. 
+	// 4. 관리자가  인기 상품을 조회할 수 있다.
+	void saleBestList() {
+		
+		try {
+			conn = DriverManager.getConnection(jdbcUrl, user, pw);
+			List<Sale> list = dao.getSaleBestList(conn);
+			
+			System.out.println("판매 상품 인기 순위 리스트");
+			System.out.println("-------------------------------------");
+			System.out.println("순위 \t상품명 \t\t판매횟수 ");
+			System.out.println("-------------------------------------");
+			
+			int rank =1 ;
+			for(Sale sale : list) {
+				System.out.printf("%d  \t %s \t %d ",rank++,  sale.getSname(), sale.getCount());
+				System.out.println();
+			}
+			
+			System.out.println("-------------------------------------");
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	
+	
+	// 5. 주문하기 메소드 -> SALE DB에 저장된다. 
 	void order(String currentId) {
 		ArrayList<Sale> list = new ArrayList<>();
 
@@ -186,13 +217,12 @@ public class SaleManager {
 					System.out.println("cake"+ inputDatas[1]+"개 주문");
 					break;
 				case "6":
-					// 주문완료시에 데이터 저장하고, 포인트 적립 및 결제 한다. 
-
+					// 주문완료시에 Sale DB에 저장한다.
 					int result = dao.insertSale(conn, list);  //SaleDao 로 넘겨서 Sale DB에 저장하기
 
 					//	------------------------------------------------------------------------------------------
 
-					// 고객에게 예상 적립 포인트와 총 결제 금액 보여주기
+					// 고객에게 예상 적립 포인트와 총 결제 금액 보여주기 (영수증 보여주기) 
 
 					System.out.println("--------------------------------------------------");
 					int totalPrice = 0;
@@ -211,7 +241,7 @@ public class SaleManager {
 					//-------------------------------------------------------------------------------------------
 					//회원 DB에서 point를 read하기
 
-					int beforePoint = pManager.readPoint(currentId);
+					int beforePoint = point.readPoint(currentId);
 					System.out.println("현재 사용가능한 포인트 : " + beforePoint);
 
 					//-----------------------------------------------------------------------------------
@@ -230,7 +260,7 @@ public class SaleManager {
 							System.out.println("--------------------------------------------------");
 
 							//point 사용 하기
-							pManager.usePoint(currentId, totalPrice);
+							point.usePoint(currentId, totalPrice);
 
 							//상품 금액 만큼의 포인트 사용하기
 							System.out.println("포인트를 "+totalPrice+"점 사용하였습니다"); 
@@ -241,7 +271,7 @@ public class SaleManager {
 							// 포인트 사용후 사용가능한 포인트 확인
 							// 남은 포인트 = 10000-4000
 
-							afterPoint = pManager.readPoint(currentId);
+							afterPoint = point.readPoint(currentId);
 							System.out.println("결제 후 포인트 : " + afterPoint); 
 
 							System.out.println("--------------------------------------------------");
@@ -252,7 +282,7 @@ public class SaleManager {
 
 							System.out.println("--------------------------------------------------");
 
-							pManager.usePoint2(currentId);
+							point.usePoint2(currentId);
 
 							System.out.println("포인트를 "+beforePoint+"점 사용하였습니다"); 
 							System.out.println("결제 금액은 " + (totalPrice-beforePoint)+ "원 입니다.");
@@ -265,7 +295,7 @@ public class SaleManager {
 					}else {//포인트 사용하지 않고 그대로 적립하기
 						System.out.println("--------------------------------------------------");
 
-						pManager.savePoint(currentId, expectedPoint); //포인트 적립
+						point.savePoint(currentId, expectedPoint); //포인트 적립
 						System.out.println("결제 금액은  " +totalPrice +"원 입니다.");
 						System.out.println("포인트가 "+expectedPoint+"점 적립되어 "+ (beforePoint+expectedPoint)+"점 있습니다.");
 

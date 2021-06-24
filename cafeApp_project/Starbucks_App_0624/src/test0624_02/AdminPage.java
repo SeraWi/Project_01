@@ -49,6 +49,9 @@ public class AdminPage {
 			case 3:
 				saleManager.menuSalePrice();
 				break;
+			case 4:
+				saleManager.saleBestList();
+				break;
 			}
 
 			break;

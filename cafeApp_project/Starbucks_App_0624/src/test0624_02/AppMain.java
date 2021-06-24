@@ -55,7 +55,6 @@ public class AppMain {
 				case 1:
 					// 주문하기
 					saleManager.order(login.currentId); 
-				
 					break;
 				case 2:
 					// 포인트 확인하기
