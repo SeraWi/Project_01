@@ -1,0 +1,48 @@
+class  정의서
+--● 메소드
+
+1.Sale 
+-- 정의 : 판매 될때 마다 객체로 저장하기 위한 클래스
+-- 변수 : salecode / sname / price / saledate
+--        ( 세일코드, 메뉴 이름, 금액, 판매된 날짜)
+-- 생성자
+-- getter, setter
+
+2. Menu 
+-- 정의 :
+-- 변수: pName / pNumSales / pSalePrice
+--        메뉴 이름, 판매된 메뉴의 개수, 메뉴 당 총 판매액
+-- 생성자
+--getter, setter
+
+3. SaleDao
+●ArrayList <Sale> getSaleList(Connection conn)  : 관리자가 전체 Sale DB  확인 가능한 메소드
+	
+●int insertSale(Connection conn, ArrayList<Sale> list) :  회원이 산 메뉴를 Sale DB에 저장하는 메소드
+
+●int getTotalSalePrice(Connection conn) :  Sale DB에서 Sum(Price) = 전체 판매액 가져 오는 메소드
+
+●ArrayList<Menu> getMenuSalePrice(Connection conn) : Sale DB에서 메뉴당 판매수와 판매액을 가져오는 메소드
+
+4. SaleManager
+●void saleList() : 관리자가 sale 전체 리스트 확인하기
+
+●int totalSalePrice()  : 관리자가 오늘 전체 판매액 확인하기 -> return totalSalePrice;
+
+●void menuSalePrice() : 관리자가 오늘 메뉴당 판매수와 판매액 확인하기
+
+●void order(String currentId) : 주문하기 메소드 -> sale db에 저장된다.
+
+
+5. Point
+
+●int readPoint(String currentId) : 포인트 확인하기( Member DB에서 가져온다)
+
+●void savePoint(String currentId, int expectedPoint) : 포인트 적립하기
+
+●void usePoint(String currentId, int totalPrice)  : 포인트 사용하기( 조건 : 가지고 있는 포인트가 결제 금액 보다 클 때 호출한다.
+	                                                                         beforePoint >= totalPrice)
+
+●void usePoint2(String currentId) : 포인트 사용하기 2( 조건: 가지고 있는 포인트보다 결제 금액이 클때 호출 ->모든 포인트 다쓰고 0이된다. point = 0
+						beforePoint < totalPrice)
+		
