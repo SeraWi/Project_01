@@ -14,9 +14,7 @@ import SaleTest.Menu_test;
 
 public class SaleManager {
 
-
-
-	SaleDao dao;
+	private SaleDao dao;
 	Scanner scanner;
 	private String currentId;
 	Point pManager;
@@ -29,20 +27,14 @@ public class SaleManager {
 	String user = "hr";
 	String pw = "tiger";
 
-
-
-
-	SaleManager(SaleDao dao){
+	public SaleManager(SaleDao dao){
+		// 초기화
 		this.dao = dao;
 		scanner= new Scanner(System.in);
 		this.currentId = currentId;
 		pManager = new Point();
 
 	}
-
-
-
-
 
 	// 1. 관리자가 sale DB의 전체리스트틑 확인할 수 있다.
 	void saleList() {

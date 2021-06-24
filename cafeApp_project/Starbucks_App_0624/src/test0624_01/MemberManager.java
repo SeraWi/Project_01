@@ -31,7 +31,7 @@ public class MemberManager {
 		this.currentId = currentId;
 	}
 
-	// 전체 리스트 출력
+	// 1.  전체 member 리스트 출력
 	void memList() {
 
 		try {
@@ -51,7 +51,7 @@ public class MemberManager {
 		}
 	}
 
-	// 내 정보 출력
+	// 2. 내 정보 출력 (아이디 값을 받아서 memberDB에서 가져온다)
 	void myInfo() {
 
 		try {
@@ -71,7 +71,7 @@ public class MemberManager {
 		}
 	}
 
-	// 데이터 입력
+	// 3. 데이터 입력 (회원가입 ->memberDB에 저장)
 	void memAdd() {
 
 		try {
@@ -108,7 +108,7 @@ public class MemberManager {
 		}
 	}
 
-	// 데이터 수정
+	// 4. 내 정보보기 -> 데이터 수정
 	void memEdit() {
 
 		try {
@@ -138,7 +138,7 @@ public class MemberManager {
 		}
 	}
 
-	// 회원 탈퇴
+	// 5. 내 정봅 괴 -> 회원 탈퇴
 	void memDel() {
 
 		try {
@@ -230,19 +230,22 @@ public class MemberManager {
 	}
 
 	// 내 포인트 확인하기
-	void memPoint() {
-		try {
-			con = DriverManager.getConnection(jdbcUrl, user, pw);
-			int havePoint = dao.readPoint(con,currentId);
-						
-			System.out.println("현재 사용가능한 포인트: " + havePoint);
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	void memPoint() {
+//		try {
+//			con = DriverManager.getConnection(jdbcUrl, user, pw);
+//			int havePoint = dao.readPoint(con,currentId);
+//						
+//			System.out.println("현재 사용가능한 포인트: " + havePoint);
+//			
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+	
+	
+	// 내 포인트 확인하기
 	void memPoint(String currentId) {
 		try {
 			con = DriverManager.getConnection(jdbcUrl, user, pw);

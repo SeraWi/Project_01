@@ -1,4 +1,4 @@
-package test0624_01;
+package saleManager_test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
