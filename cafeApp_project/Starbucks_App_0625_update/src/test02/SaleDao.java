@@ -61,22 +61,7 @@ public class SaleDao {
 		} finally {
 
 
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if( stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			close2();
 		}
 
 		return list;
@@ -106,14 +91,7 @@ public class SaleDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			close();
 		}
 
 
@@ -142,6 +120,9 @@ public class SaleDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+
+			close2();
 		}
 
 		return totalSalePrice;
@@ -174,70 +155,71 @@ public class SaleDao {
 			e.printStackTrace();
 		} finally {
 
-
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if( stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			close2();
 		}
 
 		return list;
 	}
 
-	
+
 	// 5. Sale DB에서 인기 상품을 가져온다 READ: select
 	ArrayList<Sale> getSaleBestList(Connection conn){
 		ArrayList<Sale> list = null;
 
-		
+
 		try {
 			stmt = conn.createStatement();
 			String sql = "select  sname, count from (select distinct sname, count(sname) as count from sale group by sname order by count desc ) where rownum < 4";
-			
+
 			rs = stmt.executeQuery(sql);
 			list = new ArrayList<>();
 			while(rs.next()) {
 				list.add(new Sale( rs.getInt(2), rs.getString(1)));
 			}
-					
-			
-			
+
+
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			if(stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+			close2();
+		}
+
+		return list;
+
+	}
+//---------------------------------------------------------------------
+	void close() {
+		if(pstmt != null) {
+			try {
+				pstmt.close();
+				pstmt = null;
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
-		
-		return list;
-		
 	}
-	
+
+	void close2() {
+		if(rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if( stmt != null) {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+
 }
