@@ -40,10 +40,6 @@ public class AdminPage {
 		}
 	}
 
-
-
-
-
 	// case 2: 판매 정보 보기
 	void two() {
 		while(true) {
