@@ -25,20 +25,23 @@ where id = 'park1234';
 
 drop table member;
 
-create sequence member_memcode_seq
+create sequence member_sq
 start with 1;
 
-insert into member(memcode, name, id, pw, address, phone) 
-values(member_memcode_seq.nextval, 'son','son1234','son1234','Korea','01000000000');
+drop sequence member_sq;
+
 
 insert into member(memcode, name, id, pw, address, phone) 
-values(member_memcode_seq.nextval, 'kim','kim1234','kim1234','Korea','01000000000');
+values(member_sq.nextval, 'son','son1234','son1234','Korea','01000000000');
 
 insert into member(memcode, name, id, pw, address, phone) 
-values(member_memcode_seq.nextval, 'lee','lee1234','lee1234','Korea','01000000000');
+values(member_sq.nextval, 'kim','kim1234','kim1234','Korea','01000000000');
+
+insert into member(memcode, name, id, pw, address, phone) 
+values(member_sq.nextval, 'lee','lee1234','lee1234','Korea','01000000000');
 
 insert into member(memcode, name, id, pw, address, phone, point) 
-values(member_memcode_seq.nextval, 'Park','park1234','park1234','Korea','01000000000',5000);
+values(member_sq.nextval, 'Park','park1234','park1234','Korea','01000000000',5000);
 commit;
 
 select point from member where id = 'kim1234'; -- 포인트확인하기
@@ -71,14 +74,14 @@ values(sale_salecode_seq.nextval, 'americano', 4100,'2021/06/21');
 
 
 -- 오늘 판매한거 : default sysdate
-insert into sale (salecode, sname, price)
-values(sale_salecode_seq.nextval, 'americano', 4100);
+insert into sale (salecode, sname, price,id)
+values(sale_salecode_seq.nextval, 'americano', 4100,'lee1234');
 
-insert into sale(salecode, sname, price)
-values (sale_salecode_seq.nextval, 'latte', 4600);
+insert into sale(salecode, sname, price,id)
+values (sale_salecode_seq.nextval, 'latte', 4600,'lee1234');
 
-insert into sale(salecode, sname, price)
-values (sale_salecode_seq.nextval, 'sandwich', 6200);
+insert into sale(salecode, sname, price,id)
+values (sale_salecode_seq.nextval, 'sandwich', 6200,'lee1234');
 
 
 

@@ -1,4 +1,4 @@
-package test0625_01;
+package test0625_02;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

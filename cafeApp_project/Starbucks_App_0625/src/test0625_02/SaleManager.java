@@ -1,4 +1,4 @@
-package test0625_01;
+package test0625_02;
 
 import java.io.DataOutput;
 import java.sql.Connection;

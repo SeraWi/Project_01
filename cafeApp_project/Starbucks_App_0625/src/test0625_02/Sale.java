@@ -1,4 +1,4 @@
-package MenuSaleTest;
+package test0625_02;
 
 public class Sale {
 	//판매 된 데이터 저장 하기 위해
@@ -38,12 +38,12 @@ public class Sale {
 		this.sname = sname;
 		this.price= price;
 	}
-	//생성자 오버로딩 2-보충 ->Sale DB에 저장(insert)하게 될 때 사용자 아이디도 같이 저장하기 2021.06.25
+	//생성자 오버로딩 2-보충 ->Sale DB에 저장하게 될 때 사용자 아이디도 같이 저장하기 2021.06.25
 	
 	public Sale(String sname, int price, String id) { 
 		this.sname = sname;
 		this.price= price;
-		this.id = id;
+		this.id= id;
 	}
 	
 	// 생성자 오버로딩 3 -> saleBestManager에 쓸 수 있는 생성자

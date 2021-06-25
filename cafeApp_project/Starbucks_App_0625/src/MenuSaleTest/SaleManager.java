@@ -148,7 +148,8 @@ public class SaleManager {
 	// 5. 주문하기 메소드 -> SALE DB에 저장된다. 
 	void order(String currentId) {
 		ArrayList<Sale> list = new ArrayList<>();
-
+		this.currentId = currentId;
+		
 		// 주문하기 = sale DB에 저장한다. 
 
 		//connection객체 생성
