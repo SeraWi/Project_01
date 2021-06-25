@@ -40,6 +40,7 @@ values (sale_sq.nextval, 'latte', 4600,'park1234',1);
 insert into sale(salecode, sname, price, id,count)
 values (sale_sq.nextval, 'sandwich', 6200,'Lee1234',1);
 
+commit;
 
 
 insert into sale(salecode, sname, price)
