@@ -13,9 +13,9 @@ import java.util.Scanner;
 public class SaleManager {
 
 	private SaleDao dao;
-	Scanner scanner;
-	private String currentId;
-	Point point;
+	private Scanner scanner;
+	//private String currentId;
+	private Point point;
 
 	// Connection 객체 생성 
 	Connection conn = null;
@@ -29,7 +29,7 @@ public class SaleManager {
 		// 초기화
 		this.dao = dao;
 		scanner= new Scanner(System.in);
-		this.currentId = currentId;
+		//this.currentId = currentId;
 		point = new Point();
 
 	}
