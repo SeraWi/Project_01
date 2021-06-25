@@ -22,4 +22,7 @@ insert into menu(menucode, mname, price) values (menu_sq.nextval, 'bagel', 2300)
 insert into menu(menucode, mname, price) values (menu_sq.nextval, 'cake', 4800);
 insert into menu(menucode, mname, price) values (menu_sq.nextval, 'cake', 4800);
 
+update menu set mname = ?, price =? where menucode = 1;
+
+select * from menu;
 commit;

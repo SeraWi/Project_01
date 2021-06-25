@@ -42,6 +42,14 @@ values(member_sq.nextval, 'lee','lee1234','lee1234','Korea','01000000000');
 
 insert into member(memcode, name, id, pw, address, phone, point) 
 values(member_sq.nextval, 'Park','park1234','park1234','Korea','01000000000',5000);
+
+update member set point= 5000 where id = 'park1234';
+
+
+insert into member(memcode, name, id, pw, address, phone) 
+values(member_sq.nextval, 'admin','admin','admin','Korea','01000000000');
+
+
 commit;
 
 select point from member where id = 'kim1234'; -- 포인트확인하기
