@@ -224,7 +224,7 @@ public class SaleManager {
 					System.out.println(list.get(i).getSname() + "\t\t" + list.get(i).getScount() + "\t" + (list.get(i).getPrice()));
 				}	
 			}	
-			//System.out.println("\t\t총액 :\t"+totalPrice);
+			System.out.println("\t\t총액 :\t"+totalPrice);
 			
 			
 			
