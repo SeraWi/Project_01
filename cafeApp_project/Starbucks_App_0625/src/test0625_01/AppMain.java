@@ -36,7 +36,7 @@ public class AppMain {
 				login.chkLogin();
 				break;
 			case 3: 
-				admin.calling();
+				admin.mainOpen();
 				System.exit(0);
 				break;
 			default :

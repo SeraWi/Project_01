@@ -13,20 +13,38 @@ public class Sale {
 	private int pNumSales; // 메뉴 당 몇개를 팔았는지 count값
 	private int pSalePrice; // 메뉴 당 판매액 sum 값
 	
+	private String id; // 고객 아이디
 	
+	
+
+	//생성자 1 : DB에서 전체 SaleTable가져올 때 사용
 	public Sale(int salecode, String sname, int price, String saledate) {
 		this. salecode = salecode;
 		this.sname = sname;
 		this.price= price;
 		this.saledate = saledate;
 	}
-	
+	//생성자 1-보충 : 테스트 생성자, SaleTable전체 리스트 가져올 때 회원 아이디 추가
+	public Sale(int salecode, String sname, int price, String saledate, String id) {
+		this. salecode = salecode;
+		this.sname = sname;
+		this.price= price;
+		this.saledate = saledate;
+		this.id = id;
+	}
 	
 	//생성자 오버로딩 2 ->SaleDB에 저장하게 될 때 사용자
 	public Sale(String sname, int price) { 
 		this.sname = sname;
 		this.price= price;
 	}
+	//생성자 오버로딩 2-보충 ->Sale DB에 저장하게 될 때 사용자 아이디도 같이 저장하기 2021.06.25
+	
+	public Sale(String sname, int price, String id) { 
+		this.sname = sname;
+		this.price= price;
+	}
+	
 	// 생성자 오버로딩 3 -> saleBestManager에 쓸 수 있는 생성자
 	
 	public Sale( int count, String sname) {
@@ -111,6 +129,16 @@ public class Sale {
 
 	public void setpSalePrice(int pSalePrice) {
 		this.pSalePrice = pSalePrice;
+	}
+	
+	//추가 데이터 21.06.25
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

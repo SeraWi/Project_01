@@ -48,8 +48,8 @@ public class SaleManager {
 			System.out.println("-------------------------------------");
 
 			for(Sale sale : list) {
-				System.out.printf("%d \t %s \t %d \t %s \n", 
-						sale.getSalecode(), sale.getSname(), sale.getPrice(), sale.getSaledate()
+				System.out.printf("%d \t %s \t %d \t %s %s \n", 
+						sale.getSalecode(), sale.getSname(), sale.getPrice(), sale.getSaledate(),sale.getId()
 						);
 			}
 			System.out.println("-------------------------------------");
@@ -195,24 +195,24 @@ public class SaleManager {
 				switch(inputDatas[0]) {
 
 				case "1":
-					list.add(new Sale("americano", Integer.parseInt(inputDatas[1])*americano));
-					System.out.println("americano"+ inputDatas[1]+"잔 주문");
+					list.add(new Sale("americano", Integer.parseInt(inputDatas[1])*americano,currentId));
+					System.out.println("americano "+ inputDatas[1]+"잔 주문");
 					break;
 				case "2":
-					list.add(new Sale("latte", Integer.parseInt(inputDatas[1])*latte));
-					System.out.println("latte"+ inputDatas[1]+"잔 주문");
+					list.add(new Sale("latte", Integer.parseInt(inputDatas[1])*latte,currentId));
+					System.out.println("latte "+ inputDatas[1]+"잔 주문");
 					break;
 				case "3":
-					list.add(new Sale("sandwich", Integer.parseInt(inputDatas[1])*sandwich));
-					System.out.println("sandwich"+ inputDatas[1]+"개 주문");
+					list.add(new Sale("sandwich", Integer.parseInt(inputDatas[1])*sandwich,currentId));
+					System.out.println("sandwich "+ inputDatas[1]+"개 주문");
 					break;
 				case "4":
-					list.add(new Sale("salad", Integer.parseInt(inputDatas[1])*salad));
-					System.out.println("salad"+ inputDatas[1]+"개 주문");
+					list.add(new Sale("salad", Integer.parseInt(inputDatas[1])*salad,currentId));
+					System.out.println("salad "+ inputDatas[1]+"개 주문");
 					break;
 				case "5": 
-					list.add(new Sale("cake", Integer.parseInt(inputDatas[1])*cake));
-					System.out.println("cake"+ inputDatas[1]+"개 주문");
+					list.add(new Sale("cake", Integer.parseInt(inputDatas[1])*cake,currentId));
+					System.out.println("cake "+ inputDatas[1]+"개 주문");
 					break;
 				case "6":
 					// 주문완료시에 Sale DB에 저장한다.

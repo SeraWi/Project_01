@@ -51,7 +51,7 @@ public class SaleDao {
 
 			//받아온 데이터를 sale 객체로 생성 ->list에 저장
 			while(rs.next()) {
-				list.add(new Sale(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4)));
+				list.add(new Sale(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5)));
 			}
 
 
@@ -88,7 +88,7 @@ public class SaleDao {
 		int result = 0 ;
 
 
-		String sql = "insert into sale (salecode, sname, price) values(sale_salecode_seq.nextval, ?, ?)";
+		String sql = "insert into sale (salecode, sname, price,id) values(sale_salecode_seq.nextval, ?, ?,?)";
 
 
 		try {
@@ -98,6 +98,7 @@ public class SaleDao {
 
 				pstmt.setString(1,list.get(i).getSname());
 				pstmt.setInt(2, list.get(i).getPrice());
+				pstmt.setString(3, list.get(i).getId());
 				result = pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
