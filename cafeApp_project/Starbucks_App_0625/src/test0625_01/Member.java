@@ -1,4 +1,4 @@
-package test0624_02;
+package test0625_01;
 
 public class Member {
 
