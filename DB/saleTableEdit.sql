@@ -12,39 +12,39 @@ id varchar2(50)not null
 -- salecode
 desc sale;
 -- salecode 에 seqeunce넣기
-create sequence sale_salecode_seq
+create sequence sale_sq
 start with 1;
 drop table sale;
-drop sequence sale_salecode_seq;
+drop sequence sale_sq;
 
 --오늘 아닌 판매
 insert into sale (salecode, sname, price,saledate, id)
-values(sale_salecode_seq.nextval, 'americano', 4100,'2020/06/21','park1234');
+values(sale_sq.nextval, 'americano', 4100,'2020/06/21','park1234');
 
 insert into sale (salecode, sname, price,saledate,id)
-values(sale_salecode_seq.nextval, 'americano', 4100,'2021/06/21','park1234');
+values(sale_sq.nextval, 'americano', 4100,'2021/06/21','park1234');
 
 insert into sale (salecode, sname, price,saledate,id)
-values(sale_salecode_seq.nextval, 'americano', 4100,'2021/06/21','Lee1234');
+values(sale_sq.nextval, 'americano', 4100,'2021/06/21','Lee1234');
 
 
 -- 오늘 판매한거 : default sysdate
-insert into sale (salecode, sname, price)
-values(sale_salecode_seq.nextval, 'americano', 4100);
+insert into sale (salecode, sname, price, id)
+values(sale_sq.nextval, 'americano', 4100,'park1234');
+
+insert into sale(salecode, sname, price, id)
+values (sale_sq.nextval, 'latte', 4600,'park1234');
+
+insert into sale(salecode, sname, price, id)
+values (sale_sq.nextval, 'sandwich', 6200,'Lee1234');
+
+
 
 insert into sale(salecode, sname, price)
-values (sale_salecode_seq.nextval, 'latte', 4600);
+values (sale_sq.nextval, 'salad', 5000);
 
 insert into sale(salecode, sname, price)
-values (sale_salecode_seq.nextval, 'sandwich', 6200);
-
-
-
-insert into sale(salecode, sname, price)
-values (sale_salecode_seq.nextval, 'salad', 5000);
-
-insert into sale(salecode, sname, price)
-values (sale_salecode_seq.nextval, 'cake', 5500);
+values (sale_sq.nextval, 'cake', 5500);
 
 select * from sale order by salecode
 ;
