@@ -216,6 +216,7 @@ public class SaleManager {
 
 			
 			// 영수증 추가 06.25
+			System.out.println("====================주문내역 =========================");
 			System.out.println("메뉴\t\t수량 \t금액");
 			for(int i=0; i<list.size(); i++) {
 				if(list.get(i).getSname().length() >= 8) {
@@ -228,7 +229,7 @@ public class SaleManager {
 			
 			
 			
-			
+			System.out.println("--------------------------------------------------");
 			System.out.println("총 예상 결제 금액: " +totalPrice +"원 입니다.");	
 			System.out.println("총 예상 적립 포인트:"+ expectedPoint +"점입니다."); 
 
