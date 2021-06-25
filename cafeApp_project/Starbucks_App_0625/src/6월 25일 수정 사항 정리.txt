@@ -1,0 +1,10 @@
+--06.25.금요일 변경사항
+
+기존의 MenuSale을 Sale로 합쳤음 ->Sale에 변수 및 생성자 추가, MenuSale 클래스 삭제
+
+Sale DB에 저장할 때 (insert) 마지막 컬럼에 주문하는 고객 아이디 넣도록 했음
+->Sale, SaleDao, SaleManager에 생성자 추가 및 메소드에 id값 추가 했음
+
+Member 관련 class 모두 변경
+
+AdminPage에 switch 문 반복 해결 
