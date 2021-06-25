@@ -7,8 +7,10 @@ salecode varchar2(50) constraint sale_PK primary key,
 sname varchar2(50) not null,
 price integer not null,
 saledate date default sysdate,
-id varchar2(50)not null
+id varchar2(50)not null,
+count number(10) not null
 );
+
 -- salecode
 desc sale;
 -- salecode 에 seqeunce넣기
@@ -29,14 +31,14 @@ values(sale_sq.nextval, 'americano', 4100,'2021/06/21','Lee1234');
 
 
 -- 오늘 판매한거 : default sysdate
-insert into sale (salecode, sname, price, id)
-values(sale_sq.nextval, 'americano', 4100,'park1234');
+insert into sale (salecode, sname, price, id,count)
+values(sale_sq.nextval, 'americano', 4100,'park1234', 1);
 
-insert into sale(salecode, sname, price, id)
-values (sale_sq.nextval, 'latte', 4600,'park1234');
+insert into sale(salecode, sname, price, id,count)
+values (sale_sq.nextval, 'latte', 4600,'park1234',1);
 
-insert into sale(salecode, sname, price, id)
-values (sale_sq.nextval, 'sandwich', 6200,'Lee1234');
+insert into sale(salecode, sname, price, id,count)
+values (sale_sq.nextval, 'sandwich', 6200,'Lee1234',1);
 
 
 
