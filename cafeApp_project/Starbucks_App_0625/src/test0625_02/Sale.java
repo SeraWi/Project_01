@@ -24,7 +24,7 @@ public class Sale {
 		this.price= price;
 		this.saledate = saledate;
 	}
-	//생성자 1-보충 : 테스트 생성자, SaleTable전체 리스트 가져올 때 회원 아이디 추가
+	//생성자 1-6/25일 추가 : 테스트 생성자, SaleTable전체 리스트 가져올 때 회원 아이디 추가
 	public Sale(int salecode, String sname, int price, String saledate, String id) {
 		this. salecode = salecode;
 		this.sname = sname;
@@ -33,13 +33,13 @@ public class Sale {
 		this.id = id;
 	}
 	
-	//생성자 오버로딩 2 ->SaleDB에 저장하게 될 때 사용자
+	//생성자 오버로딩 2 : SaleDB에 저장하게 될 때 사용자
 	public Sale(String sname, int price) { 
 		this.sname = sname;
 		this.price= price;
 	}
-	//생성자 오버로딩 2-보충 ->Sale DB에 저장하게 될 때 사용자 아이디도 같이 저장하기 2021.06.25
 	
+	//생성자 오버로딩 2-6/25일 추가 ->Sale DB에 저장하게 될 때 사용자 아이디도 같이 저장하기 2021.06.25
 	public Sale(String sname, int price, String id) { 
 		this.sname = sname;
 		this.price= price;
