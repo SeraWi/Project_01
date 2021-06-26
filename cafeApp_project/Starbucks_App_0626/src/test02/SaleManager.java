@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Scanner;
 
 
-//import SaleTest.Menu_test;
-
 
 public class SaleManager {
 
@@ -23,8 +21,8 @@ public class SaleManager {
 	private Scanner scanner;
 	private Point pManager;
 	private Login login = new Login(MemberDao.getInstance());
-	private int totalPrice;
-	private int expectedPoint;
+	private int totalPrice; // 예상 결제 금액
+	private int expectedPoint; //예상 적립 포인트
 	private ArrayList<Sale> list;
 	
 	// Connection 객체 생성 
@@ -170,7 +168,7 @@ public class SaleManager {
 	
 	
 	
-	// 5. 주문하기 메소드 -> SALE DB에 저장된다. 
+	// 5. 고객이 주문한다 
 	void order(String currentId) {
 		
 		MenuManager menuManager = new MenuManager(MenuDao.getInstance());
@@ -196,21 +194,22 @@ public class SaleManager {
 				System.out.println("원하시는 메뉴의 번호와 수량을 입력하세요. 주문이 완료되면 0을 입력하세요.");
 				System.out.println("예시)1 3");
 				String inputData = scanner.nextLine();
-				String[] inputDatas = inputData.split(" ");
+				String[] inputDatas = inputData.split(" "); // 공백 기준으롤 잘라서 저장
 				
-				if(Integer.parseInt(inputDatas[0]) == 0) {
+				if(Integer.parseInt(inputDatas[0]) == 0) { // 주문완료==0일경우 
 					break;
 				}
-				for (int inx=0; inx<menu.size(); inx++) {	
+				for (int inx=0; inx<menu.size(); inx++) {	// sale 객체에 주문한 수량, 메뉴이름, 메뉴 총금액으로 저장한다. 
 					if (Integer.parseInt(inputDatas[0]) == menu.get(inx).getRowNum()) {
 						list.add(new Sale(Integer.parseInt(inputDatas[1]), menu.get(inx).getMname(), menu.get(inx).getPrice()*Integer.parseInt(inputDatas[1])));
 						
-						System.out.println(menu.get(inx).getMname()+ " "+ inputDatas[1]+"개 주문");
+						System.out.println(menu.get(inx).getMname()+ " "+ inputDatas[1]+"개 주문"); 
 					}
 				}
 			}
 	
 					// 주문완료시에 데이터 저장하고, 포인트 적립 및 결제 한다. 
+					// 데이터 저장할 때 sale DB에 고객 아이디 들어갈 수 있게, 현재 아이디 값 같이 넘겨준다. 
 					int result = dao.insertSale(conn, list, currentId);  //SaleDao 로 넘겨서 Sale DB에 저장하기
 
 					//	------------------------------------------------------------------------------------------
@@ -226,14 +225,14 @@ public class SaleManager {
 
 					expectedPoint = (int)(totalPrice * 0.01);
 
-					// 영수증 추가 06.25
+					// 주문 내역 보여주기(결제전)
 					System.out.println();
 					System.out.println("\t            주문내역");
 					System.out.println("\t***************  ");
 					System.out.println("〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓");
 					System.out.println("메뉴\t\t수량 \t금액");
 					for(int i=0; i<list.size(); i++) {
-						if(list.get(i).getSname().length() >= 8) {
+						if(list.get(i).getSname().length() >= 8) { // 주문할 때 받은 객체
 							System.out.println(list.get(i).getSname() + "\t" + list.get(i).getScount() + "\t" + (list.get(i).getPrice()));
 						} else {
 							System.out.println(list.get(i).getSname() + "\t\t" + list.get(i).getScount() + "\t" + (list.get(i).getPrice()));
@@ -256,12 +255,13 @@ public class SaleManager {
 			e.printStackTrace();
 		}
 	}
-		// 6.결제
+		// 6.고객이 결제하고 포인트를 사용할 수 있다.
+		//   주문내역과 영수증을 출력한다. 
 		void pay(String currentId) {
 			
 					//-------------------------------------------------------------------------------------------
 					// 최종 결제 금액 6.26추가
-					int finalPrice = 0;
+					int finalPrice = 0; 
 			
 			
 					//-------------------------------------------------------------------------------------------
@@ -337,7 +337,7 @@ public class SaleManager {
 						System.out.println();
 					}
 					
-					// 영수증
+					// 영수증추가 06.26
 					Calendar time = Calendar.getInstance();
 					SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
 					String format_time1 = format.format(time.getTime());
@@ -358,7 +358,7 @@ public class SaleManager {
 					}				
 					System.out.println("〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓");
 					System.out.println("\t\t총액\t"+finalPrice);
-//					System.out.println("\t\t현재 포인트\t" + pManager.readPoint(currentId));
+					System.out.println("\t\t현재 포인트\t" + pManager.readPoint(currentId));
 					System.out.println();
 	}
 
