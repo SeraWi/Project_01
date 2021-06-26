@@ -1,4 +1,4 @@
-package test;
+package test02;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,12 +29,15 @@ public class SaleDao {
 	ResultSet rs = null;
 
 
-	// 1.관리자가 전체 데이터 확인 가능하다. READ : SELECT
+	// 1.관리자가 전체 데이터 확인 가능하다.
 
 	ArrayList <Sale> getSaleList(Connection conn){
 		ArrayList<Sale> list = null;
 
+
+
 		//데이터 베이스의 Sale테이블에서 select한 결과를  ->list에 저장한다.
+
 
 		try {
 			stmt = conn.createStatement();
@@ -79,7 +82,7 @@ public class SaleDao {
 		return list;
 	}
 
-	// 2. 회원이 산 메뉴를 판매 DB에 저장한다. CREATE : INSERT
+	// 2. 회원이 산 메뉴를 판매 DB에 저장한다. create: insert
 
 	int insertSale(Connection conn, ArrayList<Sale> list, String currentid) {//sale 어레이 리스트 전달받기
 		int result = 0 ;
@@ -117,7 +120,7 @@ public class SaleDao {
 		return result;
 	}
 
-	// 3. Sale DB에서 Sum(Price) = 전체 판매액 가져 온다. READ : SELECT
+	// 3. Sale DB에서 Sum(Price) = 전체 판매액 가져 온다. Read: select 
 	int getTotalSalePrice(Connection conn) {
 		int totalSalePrice = 0;
 
@@ -145,7 +148,7 @@ public class SaleDao {
 	}
 
 
-	// 4. Sale DB에서 메뉴당 판매수와 판매액을 가져온다. READ : SELECT
+	// 4. Sale DB에서 메뉴당 판매수와 판매액을 가져온다. READ : select
 	ArrayList<Sale> getMenuSalePrice(Connection conn) {
 		ArrayList<Sale> list = null;
 
@@ -194,7 +197,7 @@ public class SaleDao {
 	}
 
 	
-	// 5. Sale DB에서 인기 상품을 조회해서 가져온다 READ: SELECT
+	// 5. Sale DB에서 인기 상품을 가져온다 READ: select
 	ArrayList<Sale> getSaleBestList(Connection conn){
 		ArrayList<Sale> list = null;
 

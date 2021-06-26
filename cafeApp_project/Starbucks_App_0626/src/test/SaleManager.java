@@ -14,14 +14,16 @@ import java.util.Scanner;
 
 public class SaleManager {
 
-	private SaleDao dao;
+	private SaleDao dao; 
 	private MenuDao mdao;
 	Scanner scanner;
 	Point pManager;
 	Login login = new Login(MemberDao.getInstance());
-	int totalPrice;
-	int expectedPoint;
+	int totalPrice; // 예상 결제 금액(포인트 사용전)
+	int expectedPoint; // 예상 적립 포인트
 	ArrayList<Sale> list;
+	int afterTotalPrice; // 최종 결제 금액
+	
 	
 	// Connection 객체 생성 
 	Connection conn = null;
@@ -216,6 +218,19 @@ public class SaleManager {
 					}
 
 					expectedPoint = (int)(totalPrice * 0.01);
+					
+					// 주문내역 추가 06.26
+					System.out.println("====================주문내역 =========================");
+					System.out.println("메뉴\t\t수량 \t금액");
+					for(int i=0; i<list.size(); i++) {
+						if(list.get(i).getSname().length() >= 8) {
+							System.out.println(list.get(i).getSname() + "\t" + list.get(i).getScount() + "\t" + (list.get(i).getPrice()));
+						} else {
+							System.out.println(list.get(i).getSname() + "\t\t" + list.get(i).getScount() + "\t" + (list.get(i).getPrice()));
+						}	
+					}	
+					System.out.println("\t\t총액 :\t"+totalPrice);
+					
 
 					System.out.println("총 예상 결제 금액: " +totalPrice +"원 입니다.");	
 					System.out.println("총 예상 적립 포인트:"+ expectedPoint +"점입니다."); 
@@ -278,9 +293,11 @@ public class SaleManager {
 							System.out.println("--------------------------------------------------");
 
 							pManager.usePoint2(currentId);
-
-							System.out.println("포인트를 "+beforePoint+"점 사용하였습니다"); 
-							System.out.println("결제 금액은 " + (totalPrice-beforePoint)+ "원 입니다.");
+							
+							System.out.println("포인트를 "+beforePoint+"점 사용하였습니다");
+							// 추가
+							afterTotalPrice = totalPrice- beforePoint;
+							System.out.println("결제 금액은 " + afterTotalPrice+ "원 입니다.");
 							System.out.println("결제 후 포인트 : 0 점" ); 
 
 							System.out.println("--------------------------------------------------");
@@ -291,7 +308,10 @@ public class SaleManager {
 						System.out.println("--------------------------------------------------");
 
 						pManager.savePoint(currentId, expectedPoint); //포인트 적립
-						System.out.println("결제 금액은  " +totalPrice +"원 입니다.");
+						//추가 06.26
+						afterTotalPrice = totalPrice;
+						System.out.println("결제 금액은  " +afterTotalPrice +"원 입니다.");
+						
 						System.out.println("포인트가 "+expectedPoint+"점 적립되어 "+ (beforePoint+expectedPoint)+"점 있습니다.");
 
 						System.out.println("--------------------------------------------------");
@@ -307,7 +327,8 @@ public class SaleManager {
 							System.out.println(list.get(i).getSname() + "\t\t" + list.get(i).getScount() + "\t" + (list.get(i).getPrice()));
 						}	
 					}	
-					System.out.println("\t\t총액 :\t"+totalPrice);
+					//System.out.println("\t\t총액 :\t"+totalPrice);
+					System.out.println("\t\t총액 :\t"+afterTotalPrice); // 수정
 	}
 
 }
