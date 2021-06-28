@@ -1,4 +1,4 @@
-package test02;
+package app;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,12 +11,12 @@ public class Login {
 
 /*
 	MemberManager 클래스 정의 (메소드기능 - Dao)
+	
 	1. 로그인시 아이디, 비밀번호 확인 - MemberDao.getList
 	2. 로그아웃 - static
 	3. ** public static String currentId
 */
-	
-	
+		
 	private MemberDao dao;
 	private Scanner sc;
 	public static String currentId;

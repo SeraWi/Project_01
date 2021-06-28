@@ -1,4 +1,4 @@
-package test02;
+package app;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,11 +9,12 @@ import java.util.Scanner;
 
 public class MenuManager {
 /*
-	MenuManager 클래스 정의 (메소드기능 - Dao)
- 	1. 전체 메뉴리스트 출력 (회원, 관리자 공용) - MenuDao.getList
- 	2. 메뉴 데이터 추가 (관리자용) - MenuDao.insertMenu
-  	3. 내 정보 수정 (회원용) -	MenuDao.editMenu				
-	4. 회원 탈퇴 (회원용) - MenuDao.deleteMenu	 
+	MenuManager 클래스 정의 (메소드명 : 메소드기능 - 사용된 Dao)
+	
+ 	1. void menuList() : 전체 메뉴리스트 출력 (회원, 관리자 공용) - MenuDao.getList
+ 	2. void menuAdd() : 메뉴 데이터 추가 (관리자용) - MenuDao.insertMenu
+  	3. void menuEdit() : 내 정보 수정 (회원용) -	MenuDao.editMenu				
+	4. void menuDel() : 회원 탈퇴 (회원용) - MenuDao.deleteMenu	 
  */
 	
 	private MenuDao dao;
@@ -26,9 +27,6 @@ public class MenuManager {
 	private String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:xe";
 	private String user = "hr";
 	private String pw = "tiger";
-
-	public MenuManager() {
-	};
 
 	public MenuManager(MenuDao dao) {
 		this.dao = dao;

@@ -1,6 +1,6 @@
-package test02;
+package app;
 
-public class Member {
+public class Member {		// 회원정보 변수, 생성자 정의
 
 	private int memcode; 	// 회원의 고유번호
 	private String name; 	// 이름
@@ -12,7 +12,6 @@ public class Member {
 
 	// 생성자 1 : 관리자가  회원 전체 테이블 조회하기 위한 생성자
 	public Member(int memcode, String name, String id, String pw, String address, String phone, int point) {
-		super();
 		this.memcode = memcode;
 		this.name = name;
 		this.id = id;
@@ -39,6 +38,7 @@ public class Member {
 		this.phone = phone;
 		
 	}
+
 	// 생성자 4: 아이디 체크
 	public Member(String id) {
 		this.id = id;
@@ -49,12 +49,8 @@ public class Member {
 		this.address = address;
 		this.phone=phone;
 	}
-	
-	// 생성자 6 : 관리자가 자신의 비밀번호 수정할 때 사용.
-//	public Member(String pw) {
-//		this.pw = pw;
-//	}
-	
+		
+	// getter, setter
 	public int getMemcode() {
 		return memcode;
 	}
@@ -111,6 +107,7 @@ public class Member {
 		this.point = point;
 	}
 
+	// toString
 	@Override
 	public String toString() {
 		return "Member [memcode=" + memcode + ", name=" + name + ", id=" + id + ", pw=" + pw + ", address=" + address

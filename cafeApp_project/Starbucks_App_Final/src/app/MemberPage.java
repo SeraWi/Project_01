@@ -1,4 +1,4 @@
-package test02;
+package app;
 
 import java.util.Scanner;
 
@@ -6,6 +6,7 @@ public class MemberPage {
 
 /*	
 	MemberManager 클래스 정의
+	
 	회원용 페이지 - 주문, 포인트조회, 개인정보확인, 수정, 탈퇴
 	인스턴스 생성 - Login, MemberManager, SaleManager, Point
 */
