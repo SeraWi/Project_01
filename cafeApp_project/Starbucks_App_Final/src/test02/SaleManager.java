@@ -149,9 +149,11 @@ public class SaleManager {
 				int rank =1 ;
 				for(Sale sale : list) {
 					if(sale.getSname().length() >= 8) {
-						System.out.printf("%d\t%s\t%d\n", rank++, sale.getSname(), sale.getCount());
+						System.out.printf("%d\t%s\t%d\n", 
+								rank++, sale.getSname(), sale.getCount());
 					} else {
-						System.out.printf("%d\t%s\t\t%d\n", rank++, sale.getSname(), sale.getCount());
+						System.out.printf("%d\t%s\t\t%d\n",
+								rank++, sale.getSname(), sale.getCount());
 					}
 
 				}				
@@ -201,7 +203,8 @@ public class SaleManager {
 				}
 				for (int inx=0; inx<menu.size(); inx++) {	// sale 객체에 주문한 수량, 메뉴이름, 메뉴 총금액으로 저장한다. 
 					if (Integer.parseInt(inputDatas[0]) == menu.get(inx).getRowNum()) {
-						list.add(new Sale(Integer.parseInt(inputDatas[1]), menu.get(inx).getMname(), menu.get(inx).getPrice()*Integer.parseInt(inputDatas[1])));
+						list.add(new Sale(Integer.parseInt(inputDatas[1]), menu.get(inx).getMname(), 
+								menu.get(inx).getPrice()*Integer.parseInt(inputDatas[1])));
 						
 						System.out.println(menu.get(inx).getMname()+ " "+ inputDatas[1]+"개 주문"); 
 					}

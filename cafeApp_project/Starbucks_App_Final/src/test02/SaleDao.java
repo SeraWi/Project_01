@@ -84,7 +84,8 @@ public class SaleDao {
 		int result = 0 ;
 
 
-		String sql = "insert into sale (salecode, sname, price, id, count) values(sale_sq.nextval, ?, ?, ?, ?)";
+		String sql = "insert into sale (salecode, sname, price, id, count) "
+				+ "values(sale_sq.nextval, ?, ?, ?, ?)";
 
 
 		try {
@@ -201,7 +202,8 @@ public class SaleDao {
 		
 		try {
 			stmt = conn.createStatement();
-			String sql = "select  sname, count from (select distinct sname, count(sname) as count from sale group by sname order by count desc ) where rownum < 4";
+			String sql = "select  sname, count from (select distinct sname, count(sname) as count"
+					+ " from sale group by sname order by count desc ) where rownum < 4";
 			
 			rs = stmt.executeQuery(sql);
 			list = new ArrayList<>();
