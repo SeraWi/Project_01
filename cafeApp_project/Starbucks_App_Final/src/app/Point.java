@@ -1,4 +1,4 @@
-package test02;
+package app;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,19 +8,16 @@ import java.sql.SQLException;
 
 public class Point {
 	// Point 클래스 정의
-	// 1. Point 읽어온다 -> readPoint -> READ : SELECT
-	// 2. Point 적립한다. -> savePoint -> UPDATE : UPDATE
-	// 3. Point 사용한다. ->usePoint -> UPDATE : UPDATE
+	// 1. Point 읽어온다 -> readPoint -> read (select)
+	// 2. Point 적립한다. -> savePoint -> update
+	// 3. Point 사용한다. ->usePoint ->update
 	// 파라미터로 currentId를 받아온다. 
 	
 	
-	private Connection conn = null;
-	private PreparedStatement pstmt = null;
-	private ResultSet rs = null;
-	
-	
-	// 1. point 읽어온다. Member DB에서 READ: SELECT
-	
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+
 	int readPoint(String currentId) {
 		int havePoint = 0;
 
@@ -59,10 +56,9 @@ public class Point {
 	}
 
 
-	// 2.포인트를 적립한다. UPDATE: UPDATE
-	// savePoint = 원래 가지고 있는 point +expectedPoint
+
 	void savePoint(String currentId, int expectedPoint) {
-		 
+		 //포인트를 적립한다. savePoint = 원래 가지고 있는 point +expectedPoint
 		
 		try {
 			//1. 드라이버 로드
@@ -83,6 +79,14 @@ public class Point {
 			result = pstmt.executeUpdate();
 
 
+//			if(result > 0) {
+//				System.out.println("업데이트 완료");
+//			}else {
+//				System.out.println("업데이트 실패");
+//			}
+			
+			
+
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,11 +99,11 @@ public class Point {
 	}
 
 
-	// 3. 포인트를 사용한다. UPDATE: UPDATE
-	// 가지고 있는 포인트가 결제 금액 보다 클 때 호출한다.
-	// beforePoint >= totalPrice
+	
 	 void usePoint(String currentId, int totalPrice) {
-		
+		// 포인트를 사용한다. 
+		// 가지고 있는 포인트가 결제 금액 보다 클 때 호출한다.
+		// beforePoint >= totalPrice
 		
 		try {
 			//1. 드라이버 로드
@@ -122,7 +126,13 @@ public class Point {
 
 			result = pstmt.executeUpdate();
 			
-
+//			
+//			if(result > 0) {
+//				System.out.println("업데이트 완료");
+//			}else {
+//				System.out.println("업데이트 실패");
+//			}
+//			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -134,13 +144,11 @@ public class Point {
 
 		
 	}
-	 
-	// 4. 포인트를 사용한다. UPDATE: UPDATE
-	// 가지고 있는 포인트보다 결제 금액이 클때 호출 ->모든 포인트 다쓰고 0이된다. point = 0
-	// beforePoint < totalPrice
-	 
+
 	 void usePoint2(String currentId) {
-		
+		// 포인트를 사용한다. 
+		// 가지고 있는 포인트보다 결제 금액이 클때 호출 ->모든 포인트 다쓰고 0이된다. point = 0
+		// beforePoint < totalPrice
 		
 		try {
 			//1. 드라이버 로드
@@ -163,7 +171,13 @@ public class Point {
 
 			result = pstmt.executeUpdate();
 			
-
+//			
+//			if(result > 0) {
+//				System.out.println("업데이트 완료");
+//			}else {
+//				System.out.println("업데이트 실패");
+//			}
+//			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

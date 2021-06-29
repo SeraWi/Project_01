@@ -1,4 +1,4 @@
-package test02;
+package app;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,8 +10,23 @@ import java.util.ArrayList;
 
 public class MemberDao {
 
-	private PreparedStatement pstmt = null;
+/*
+	MemberDao 클래스 정의 (메소드명 : 메소드기능)
+	
+	1. ArrayList<Member> getList(Connection con) : 전체 회원 데이터 반환 (관리자용)
+	2. ArrayList<Member> getList(Connection con, String currentId) : 현재 로그인 중인  본인의 데이터 반환 (오버로딩 / 회원용)	
+	3. int insertMem(Connection con, Member mem) : 회원 데이터 입력 (회원가입용)	
+	4. int editMem(Connection con, Member mem, String currentId) : 현재 로그인 중인  본인의 데이터 수정 (회원용)	
+	5. int deleteMem(Connection con, String currentId) : 현재 로그인 중인  본인의 회원탈퇴 (회원용) 	
+	6. ArrayList<Member> getAdminList(Connection con, String currentId) : 관리자 정보 보기 (관리자용)	
+	7. int editAdminMem(Connection con, String pw, String currentId) : 관리자 비밀번호 수정 (관리자용)	
+	8. boolean chKId(Connection con, String id) : 아이디 중복체크 (회원가입시)
+	9. void close() : PreparedStatement close
+	
+ */
 
+	private PreparedStatement pstmt = null;
+	
 	// 싱글톤 패턴
 	private MemberDao() {}
 	static private MemberDao dao = new MemberDao();
@@ -65,8 +80,11 @@ public class MemberDao {
 
 		try {
 			// sql문
-			String sql = "select * from member where id = " + "'" + currentId + "'";
+			String sql = "select * from member where id = ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, currentId);
+			pstmt.executeUpdate();
+			
 			// 결과 받아오기
 			rs = pstmt.executeQuery(sql);
 			
@@ -126,13 +144,13 @@ public class MemberDao {
 
 		try {
 			// 로그인 아이디를 where절 사용
-			String sql = "update member set name = ?, pw =?, address = ?, phone = ? where id = " + "'" + currentId
-					+ "'";
+			String sql = "update member set name = ?, pw =?, address = ?, phone = ? where id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, mem.getName());
 			pstmt.setString(2, mem.getPw());
 			pstmt.setString(3, mem.getAddress());
 			pstmt.setString(4, mem.getPhone());
+			pstmt.setString(5, currentId);
 
 			result = pstmt.executeUpdate();
 
@@ -165,7 +183,7 @@ public class MemberDao {
 		}
 		return result;
 	}
-
+	
 	// 6. 관리자 정보 보기 (추가사항)
 	// 반환 타입 List<Dept>
 	// 매개변수 - Connection 객체 : Statement, Login 클래스 : currentId
@@ -174,8 +192,6 @@ public class MemberDao {
 		ArrayList<Member> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
-		//System.out.println(currentId);
 
 		try {
 			// sql문
@@ -254,7 +270,7 @@ public class MemberDao {
 		return result;
 	}
 
-	// 8. pstmt close
+	// 9. PreparedStatement close
 	void close() {
 		if (pstmt != null) {
 			try {

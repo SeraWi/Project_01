@@ -1,4 +1,4 @@
-package test02;
+package app;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,17 @@ import java.util.ArrayList;
 
 public class MenuDao {
 
+/*
+	MenuDao 클래스 정의 (메소드명 : 메소드기능)
+	
+	1. ArrayList<Menu> getList(Connection con) : 전체 메뉴 데이터 반환 (관리자용 / 회원 주문시 메뉴출력)
+	2. int insertMenu(Connection con, Menu menu) : 메뉴 데이터 입력 (관리자용)	
+	3. int editMenu(Connection con, Menu menu) : 메뉴 데이터 수정 (관리자용)	
+	4. int deleteMenu(Connection con, String menuName) : 메뉴 데이터 삭제 (관리자용)
+	5. void close() : PreparedStatement close
+	
+ */
+	
 	private PreparedStatement pstmt = null;
 
 	// 싱글톤 패턴
