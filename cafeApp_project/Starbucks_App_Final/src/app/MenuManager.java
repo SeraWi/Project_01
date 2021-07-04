@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MenuManager {
+	
 /*
 	MenuManager 클래스 정의 (메소드명 : 메소드기능 - 사용된 Dao)
 	

@@ -1,7 +1,12 @@
 package app;
 
 public class Member {		// 회원정보 변수, 생성자 정의
-
+/*	 Member class
+  	 정의 : 회원정보를 저장한다.
+	 캡슐화
+	 getter setter
+	 생성자
+*/	
 	private int memcode; 	// 회원의 고유번호
 	private String name; 	// 이름
 	private String id;		// 아이디

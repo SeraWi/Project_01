@@ -1,7 +1,9 @@
 package app;
 
-public class Menu {				// 메뉴 변수, 생성자 정의
-
+public class Menu {			
+	// Menu class
+	// 메뉴 정보를 저장한다.
+	
 	private int menuCode;		// 메뉴 고유번호
 	private int rowNum;			// 행번호
 	private String mname;		// 메뉴 이름

@@ -8,15 +8,10 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Login {
-
-/*
-	MemberManager 클래스 정의 (메소드기능 - Dao)
-	
-	1. 로그인시 아이디, 비밀번호 확인 - MemberDao.getList
-	2. 로그아웃 - static
-	3. ** public static String currentId
+/*	 Login class
+	 로그인시 아이디, 비밀번호를 member DB에서 확인한다. 
 */
-		
+	
 	private MemberDao dao;
 	private Scanner sc;
 	public static String currentId;

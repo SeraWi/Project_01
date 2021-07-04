@@ -9,7 +9,13 @@ import java.util.Scanner;
 public class AppMain {
 
 	public static void main(String[] args) {
-
+		
+/*		 AppMain
+		 정의: 가장 메인화면을 보여준다
+		 로그인과 회원가입을 할 수 있고 로그인시 관리자 아이디로 확인될 경우 관리자 모드 페이지로 이동한다.
+		 관리자가 아닐 경우 고객 페이지로 이동한다. 
+*/
+		
 		MemberManager memberManager = new MemberManager(MemberDao.getInstance());
 		MenuManager menuManager = new MenuManager(MenuDao.getInstance());
 		SaleManager saleManager = new SaleManager(SaleDao.getInstance(), MenuDao.getInstance());

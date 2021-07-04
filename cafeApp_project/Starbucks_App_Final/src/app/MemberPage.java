@@ -3,13 +3,9 @@ package app;
 import java.util.Scanner;
 
 public class MemberPage {
-
-/*	
-	MemberManager 클래스 정의
-	
-	회원용 페이지 - 주문, 포인트조회, 개인정보확인, 수정, 탈퇴
-	인스턴스 생성 - Login, MemberManager, SaleManager, Point
-*/
+	// MemberManager 클래스 정의
+	// 로그인 시 회원으로 확인될 경우 이 페이지로 이동하게 된다.
+	// 회원은 주문, 포인트 조회, 개인정보 확인을 할 수 있다.
 	
 	MemberManager memberManager = new MemberManager(MemberDao.getInstance());
 	SaleManager saleManager = new SaleManager(SaleDao.getInstance(), MenuDao.getInstance());

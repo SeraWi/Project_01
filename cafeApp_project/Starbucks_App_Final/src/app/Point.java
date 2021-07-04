@@ -7,17 +7,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Point {
-	// Point 클래스 정의
-	// 1. Point 읽어온다 -> readPoint -> read (select)
-	// 2. Point 적립한다. -> savePoint -> update
-	// 3. Point 사용한다. ->usePoint ->update
-	// 파라미터로 currentId를 받아온다. 
 	
+/*	 Point 클래스 정의
+	 공통: 파라미터로 currentId=회원아이디를 받아서 조회하고, 수정한다)
+	 1. int readPoint(String currentId): 고객의 포인트를 int로 반환(회원용, 관리자용)
+	 2. void savePoint(String currentId, int expectedPoint): 포인트 적립(회원용)
+	 3. void usePoint(String currentId, int totalPrice): 포인트 사용(회원용)
+	 4.  void usePoint2(String currentId) : 포인트 사용(회원용)
+*/	
 	
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
+	private Connection conn = null;
+	private PreparedStatement pstmt = null;
+	private ResultSet rs = null;
 
+	// 1. point 읽어온다. Member DB에서 READ: SELECT
 	int readPoint(String currentId) {
 		int havePoint = 0;
 
@@ -45,10 +48,8 @@ public class Point {
 
 			}	
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//System.out.println("현재 사용가능한 포인트: " + havePoint);
@@ -56,7 +57,8 @@ public class Point {
 	}
 
 
-
+	// 2.포인트를 적립한다. UPDATE: UPDATE
+	// savePoint = 원래 가지고 있는 point +expectedPoint
 	void savePoint(String currentId, int expectedPoint) {
 		 //포인트를 적립한다. savePoint = 원래 가지고 있는 point +expectedPoint
 		
@@ -78,15 +80,6 @@ public class Point {
 
 			result = pstmt.executeUpdate();
 
-
-//			if(result > 0) {
-//				System.out.println("업데이트 완료");
-//			}else {
-//				System.out.println("업데이트 실패");
-//			}
-			
-			
-
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,12 +92,10 @@ public class Point {
 	}
 
 
-	
+	// 3. 포인트를 사용한다. UPDATE: UPDATE
+	// 가지고 있는 포인트가 결제 금액 보다 클 때 호출한다.
+	// beforePoint >= totalPrice
 	 void usePoint(String currentId, int totalPrice) {
-		// 포인트를 사용한다. 
-		// 가지고 있는 포인트가 결제 금액 보다 클 때 호출한다.
-		// beforePoint >= totalPrice
-		
 		try {
 			//1. 드라이버 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -126,30 +117,17 @@ public class Point {
 
 			result = pstmt.executeUpdate();
 			
-//			
-//			if(result > 0) {
-//				System.out.println("업데이트 완료");
-//			}else {
-//				System.out.println("업데이트 실패");
-//			}
-//			
-			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		
 	}
-
+	 
+	// 4. 포인트를 사용한다. UPDATE: UPDATE
+	// 가지고 있는 포인트보다 결제 금액이 클때 호출 ->모든 포인트 다쓰고 0이된다. point = 0
+	// beforePoint < totalPrice
 	 void usePoint2(String currentId) {
-		// 포인트를 사용한다. 
-		// 가지고 있는 포인트보다 결제 금액이 클때 호출 ->모든 포인트 다쓰고 0이된다. point = 0
-		// beforePoint < totalPrice
-		
 		try {
 			//1. 드라이버 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -164,32 +142,14 @@ public class Point {
 			pstmt = conn.prepareStatement(updatePoint);
 			int result = 0;
 			
-			
-			//모든
 			pstmt.setInt(1, 0);
 			pstmt.setString(2, currentId);
 
 			result = pstmt.executeUpdate();
-			
-//			
-//			if(result > 0) {
-//				System.out.println("업데이트 완료");
-//			}else {
-//				System.out.println("업데이트 실패");
-//			}
-//			
-			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		
 	}
-
-
-	
 }

@@ -3,7 +3,12 @@ package app;
 import java.util.Scanner;
 
 public class AdminPage {
-
+	
+/*	 AdminPage
+	 관리자 모드 페이지
+	 관리자는 회원에 대한 정보, 판매 내역을 조회하며 메뉴를 관리할 수 있다.
+*/
+	
 	Scanner sc = new Scanner(System.in);
 	MemberManager memManager = new MemberManager(MemberDao.getInstance());
 	SaleManager saleManager = new SaleManager(SaleDao.getInstance());
